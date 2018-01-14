@@ -1,0 +1,30 @@
+
+链接:https://pan.baidu.com/s/1nvLr32T 密码:skug
+
+1.APP组件内不要使用html5 标签
+2.如果在package.json 里自定义配置 stylus-loader 版本 会报错
+解决办法：npm install stylus-loader stylus --save-dev
+3.(main.js) 因vue 版本问题，现在是最新版本，导致路由配置 #app未能挂在成功 和
+修改webpack.base.conf.js 别名 导致报错 resolve : alias  {src': path.resolve(__dirname, '../src'),
+                                                  'common': path.resolve(__dirname, '../src/common'),
+                                                  'components': path.resolve(__dirname, '../src/components')}
+解决办法：
+在 main.js 里配置  下面代码
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
+});
+解释：render函数是渲染一个视图，然后提供给el挂载，所以不加的话就是空白什么都没有
+用 webpack 改路径别名后，不然vue 的 package.json 中的 main 指向的是 dist/vue.common.js。
+
+4. 去除 配置路由 之后 url 多个 #
+vue-router 默认 hash 模式 —— 使用 URL 的 hash 来模拟一个完整的 URL，于是当 URL 改变时，页面不会重新加载。
+如果不想要很丑的 hash，我们可以用路由的 history 模式，这种模式充分利用 history.pushState API 来完成 URL 跳转而无须重新加载页面。
+解决办法：
+配置 router     mode: 'history'  【官网有】
+
+5.
+
+
